@@ -1,0 +1,32 @@
+.app-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  .left {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 50px;
+    .add-new {
+      font-size: 18px;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #2089df;
+      color: #ffffff;
+      border: none;
+    }
+    .view-task {
+      font-size: 18px;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #0dd8ac;
+      color: #ffffff;
+      border: none;
+    }
+  }
+}
