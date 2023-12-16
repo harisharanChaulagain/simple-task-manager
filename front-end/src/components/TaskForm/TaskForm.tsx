@@ -20,11 +20,7 @@ const TaskForm: React.FC<TaskProps> = ({ onClose }) => {
             <input type="text" />
           </div>
           <div className="items">
-            <div>Description</div>
-            <textarea rows={4} cols={63} style={{ resize: "none" }} />
-          </div>
-          <div className="items">
-            <div>Priority</div>
+            <div>Priority Level</div>
             <select defaultValue="" className="priority-select">
               <option value="" disabled hidden>
                 Select Priority

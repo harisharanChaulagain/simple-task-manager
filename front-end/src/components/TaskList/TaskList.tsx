@@ -9,7 +9,7 @@ const TaskList = () => {
           <tr>
             <th>S.N.</th>
             <th>Task Name</th>
-            <th>Priority</th>
+            <th>Priority Level</th>
             <th>Action</th>
             <th>Completed</th>
           </tr>
