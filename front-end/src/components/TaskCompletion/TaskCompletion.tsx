@@ -1,10 +1,15 @@
 import { MdDelete } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
 import "./TaskCompletion.scss";
+import { useTask } from "../../services/GetApi";
 import { useNavigate } from "react-router-dom";
 
 const TaskCompletion = () => {
   const navigate = useNavigate();
+  const { data: taskData } = useTask();
+  const completedTasks = taskData
+    ? taskData.filter((task: any) => task.status)
+    : [];
   return (
     <div className="completed-task">
       <div className="top-section">
@@ -27,15 +32,18 @@ const TaskCompletion = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td>this is new task</td>
-            <td>high</td>
-            <td className="MdDelete">
-              <MdDelete />
-            </td>
-            <td>Completed</td>
-          </tr>
+          {completedTasks &&
+            completedTasks.map((task: any, index: number) => (
+              <tr key={task._id}>
+                <td>{index + 1}</td>
+                <td>{task.name}</td>
+                <td>{task.priority}</td>
+                <td className="MdDelete">
+                  <MdDelete />
+                </td>
+                <td>Completed</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
