@@ -28,7 +28,7 @@ exports.deleteTaskById = async (req, res) => {
   try {
     const taskId = req.params.id;
     if (!taskId) {
-      return res.status(400).json({ error: "Task id is rewuired" });
+      return res.status(400).json({ error: "Task id is required" });
     }
     const task = await Task.findById(taskId);
     if (!task) {
@@ -39,5 +39,26 @@ exports.deleteTaskById = async (req, res) => {
   } catch (error) {
     console.log("Error deleting task:", error);
     res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Update task status
+exports.updateTaskStatusById = async (req, res) => {
+  try {
+    const taskId = req.params.id;
+    const { status } = req.body;
+    const updatedTask = await Task.findByIdAndUpdate(
+      taskId,
+      { $set: { status } },
+      { new: true }
+    );
+
+    if (!updatedTask) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

@@ -2,21 +2,26 @@ import "./TaskList.scss";
 import { MdDelete } from "react-icons/md";
 import { useTask } from "../../services/GetApi";
 import { useDeleteTask } from "../../services/DeleteApi";
+import useTaskCompleted from "../../services/PutApi";
 
 const TaskList = () => {
   const { data: taskData } = useTask();
   const { mutation: deleteTask } = useDeleteTask();
+  const { updateTaskStatus } = useTaskCompleted();
   const incompleteTasks = taskData
     ? taskData.filter((task: any) => !task.status)
     : [];
 
-  const handleDelete = async (productId: string) => {
+  const handleDelete = async (taskId: string) => {
     try {
       const userConfirmed = window.confirm("Are you sure to delete?");
       if (userConfirmed) {
-        await deleteTask.mutate(productId);
+        await deleteTask.mutate(taskId);
       }
     } catch (error) {}
+  };
+  const handleTaskCompletion = (taskId: string) => {
+    updateTaskStatus({ taskId, status: true });
   };
 
   return (
@@ -42,7 +47,10 @@ const TaskList = () => {
                   <MdDelete />
                 </td>
                 <td>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={() => handleTaskCompletion(task._id)}
+                  />
                 </td>
               </tr>
             ))}

@@ -1,4 +1,3 @@
-import { MdDelete } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
 import "./TaskCompletion.scss";
 import { useTask } from "../../services/GetApi";
@@ -27,7 +26,6 @@ const TaskCompletion = () => {
             <th>S.N.</th>
             <th>Task Name</th>
             <th>Priority Level</th>
-            <th>Action</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -38,9 +36,6 @@ const TaskCompletion = () => {
                 <td>{index + 1}</td>
                 <td>{task.name}</td>
                 <td>{task.priority}</td>
-                <td className="MdDelete">
-                  <MdDelete />
-                </td>
                 <td>Completed</td>
               </tr>
             ))}
