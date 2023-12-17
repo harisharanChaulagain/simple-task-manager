@@ -1,12 +1,24 @@
 import "./TaskList.scss";
 import { MdDelete } from "react-icons/md";
 import { useTask } from "../../services/GetApi";
+import { useDeleteTask } from "../../services/DeleteApi";
 
 const TaskList = () => {
   const { data: taskData } = useTask();
+  const { mutation: deleteTask } = useDeleteTask();
   const incompleteTasks = taskData
     ? taskData.filter((task: any) => !task.status)
     : [];
+
+  const handleDelete = async (productId: string) => {
+    try {
+      const userConfirmed = window.confirm("Are you sure to delete?");
+      if (userConfirmed) {
+        await deleteTask.mutate(productId);
+      }
+    } catch (error) {}
+  };
+
   return (
     <div className="task-list-main">
       <table>
@@ -26,7 +38,7 @@ const TaskList = () => {
                 <td>{index + 1}</td>
                 <td>{task.name}</td>
                 <td>{task.priority}</td>
-                <td className="MdDelete">
+                <td className="MdDelete" onClick={() => handleDelete(task._id)}>
                   <MdDelete />
                 </td>
                 <td>
