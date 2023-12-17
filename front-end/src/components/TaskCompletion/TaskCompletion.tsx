@@ -35,7 +35,18 @@ const TaskCompletion = () => {
               <tr key={task._id}>
                 <td>{index + 1}</td>
                 <td>{task.name}</td>
-                <td>{task.priority}</td>
+                <td
+                  style={{
+                    color:
+                      task.priority === "high"
+                        ? "red"
+                        : task.priority === "moderate"
+                        ? "orange"
+                        : "green",
+                  }}
+                >
+                  {task.priority}
+                </td>
                 <td>Completed</td>
               </tr>
             ))}
